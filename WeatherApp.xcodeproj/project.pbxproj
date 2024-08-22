@@ -19,6 +19,7 @@
 		A94307CC2C779245007EE190 /* BottomSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94307CB2C779245007EE190 /* BottomSection.swift */; };
 		A98CE54E2C77ADD100EEA2BC /* CustomRectangl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98CE54D2C77ADD100EEA2BC /* CustomRectangl.swift */; };
 		A98CE5502C77B69400EEA2BC /* CreatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98CE54F2C77B69400EEA2BC /* CreatImage.swift */; };
+		A98CE5532C77CF5100EEA2BC /* SecondScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98CE5522C77CF5100EEA2BC /* SecondScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		A94307CB2C779245007EE190 /* BottomSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSection.swift; sourceTree = "<group>"; };
 		A98CE54D2C77ADD100EEA2BC /* CustomRectangl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangl.swift; sourceTree = "<group>"; };
 		A98CE54F2C77B69400EEA2BC /* CreatImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatImage.swift; sourceTree = "<group>"; };
+		A98CE5522C77CF5100EEA2BC /* SecondScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				A94307B32C777256007EE190 /* WeatherAppApp.swift */,
+				A98CE5512C77CB8B00EEA2BC /* SecondScreen */,
 				A94307CD2C779768007EE190 /* FirstScreen */,
 				A94307C12C777270007EE190 /* WeatherService.swift */,
 				A94307C32C7773A0007EE190 /* Weather.swift */,
@@ -105,6 +108,14 @@
 				A94307C72C77922A007EE190 /* TopSection.swift */,
 			);
 			path = content;
+			sourceTree = "<group>";
+		};
+		A98CE5512C77CB8B00EEA2BC /* SecondScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A98CE5522C77CF5100EEA2BC /* SecondScreen.swift */,
+			);
+			path = SecondScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 				A94307C62C777B21007EE190 /* BackgroundView.swift in Sources */,
 				A94307C42C7773A0007EE190 /* Weather.swift in Sources */,
 				A94307B62C777256007EE190 /* FirstScreen.swift in Sources */,
+				A98CE5532C77CF5100EEA2BC /* SecondScreen.swift in Sources */,
 				A98CE5502C77B69400EEA2BC /* CreatImage.swift in Sources */,
 				A94307C82C77922A007EE190 /* TopSection.swift in Sources */,
 				A94307B42C777256007EE190 /* WeatherAppApp.swift in Sources */,

@@ -12,6 +12,7 @@ struct MiddleSection:View {
 
     var body: some View {
         VStack {
+            
             let UrlString = String(describing: "https:\(weather.current.condition.icon.rawValue)")
             CreatImage(url:UrlString,width:150,height:150,pading: -45).scaledToFill()
             Spacer()
@@ -21,17 +22,24 @@ struct MiddleSection:View {
             let forecastDays = weather.forecast.forecastday
 
             ForEach(forecastDays, id: \.date) { item in
-                HStack {
-                    Text(dayName(from: item.date))
-                        .frame(width: UIScreen.main.bounds.width*0.28,alignment: .leading)
-                    CreatImage(url: UrlString,pading: -20)
+                let dataName = dayName(from: item.date)
+                NavigationLink {
+                    SecondScreen(hours: item.hour, isDay: weather.current.isDay, title: dataName)
+                } label: {
+                    HStack {
+                        Text(dataName)
+                            .frame(width: UIScreen.main.bounds.width*0.28,alignment: .leading)
+                        CreatImage(url: UrlString,pading: -20)
 
-                    Text("\(Int(item.day.mintempC))° - \(Int(item.day.maxtempC))°")
-                        .frame(width: UIScreen.main.bounds.width*0.28,alignment: .trailing)
+                        Text("\(Int(item.day.mintempC))° - \(Int(item.day.maxtempC))°")
+                            .frame(width: UIScreen.main.bounds.width*0.28,alignment: .trailing)
 
+                    }
+                    .font(.title2)
                 }
                 CustomRectangl(padding: 60,height: 0.4)
                     .padding(.horizontal)
+
 
             }
         }
@@ -44,12 +52,17 @@ struct MiddleSection:View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = dateFormatter.date(from: dateString) else {
-            return dateString
-        }
+                return dateString
+            }
+        let todayDateString = dateFormatter.string(from: Date())
 
-        let dayFormatter = DateFormatter()
-        dayFormatter.dateFormat = "EEEE"
-        return dayFormatter.string(from: date)
+        if dateString == todayDateString {
+                return "Today"
+            } else {
+                let dayFormatter = DateFormatter()
+                dayFormatter.dateFormat = "EEEE"
+                return dayFormatter.string(from: date)
+            }
     }
 }
 

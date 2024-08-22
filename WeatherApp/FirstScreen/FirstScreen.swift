@@ -13,20 +13,23 @@ struct FirstScreen: View {
 
     var body: some View {
         if let weather = weather {
-            ZStack {
-                BackgroundView(isDay: (weather.current.isDay == 1))
+            NavigationStack {
+                ZStack {
+                        BackgroundView(isDay: (weather.current.isDay == 1))
 
-                ScrollView {
-                    VStack {
-                        TopSection(weather: weather)
-                        Spacer()
-                        MiddleSection(weather: weather)
-                        Spacer().frame(height: 20)
-                        BottomSection(weather: weather)
-                    }
+                        ScrollView {
+                            VStack {
+                                TopSection(weather: weather)
+                                Spacer()
+                                MiddleSection(weather: weather)
+                                Spacer().frame(height: 20)
+                                BottomSection(weather: weather)
+                            }
 
+                        }
                 }
             }
+
         } else {
             Text("loading ...")
                 .onAppear {
@@ -35,6 +38,7 @@ struct FirstScreen: View {
         }
 
     }
+
 
 
 
