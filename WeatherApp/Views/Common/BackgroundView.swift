@@ -34,6 +34,6 @@ struct BackgroundView: View {
 }
 
 #Preview {
-    MainScreenView()
+    MainScreenView(isDay: true)
    // BackgroundView(isDay: true)
 }

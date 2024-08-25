@@ -43,5 +43,5 @@ struct WeatherImageView: View {
 }
 
 #Preview {
-    MainScreenView()
+    MainScreenView(isDay: true)
 }

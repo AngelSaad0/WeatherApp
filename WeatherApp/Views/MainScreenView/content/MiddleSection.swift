@@ -23,16 +23,18 @@ struct MiddleSection: View {
 
             let forecastDays = weather.forecast.forecastday
             ForEach(forecastDays, id: \.date) { item in
-                let dataName = WeatherTimeFormatter.formatDayName(from: item.date)
+                let dataName = WeatherTimeFormatter.dayOfWeek(from: item.date)
                 NavigationLink {
-                    DetailsScreenView(hours: item.hour, isDay: (weather.current.isDay != 0), title: dataName)
+                    DetailsScreenView(hours: item.hour, isDay: (weather.current.isDay != 0), title:dataName.0)
                 } label: {
                     HStack {
-                        Text(dataName)
+                        Text(dataName.1)
                             .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .leading)
                         WeatherImageView(url: iconURL, padding: -20)
-                        Text("\(Int(item.day.mintempC))° - \(Int(item.day.maxtempC))°")
+                        Text("\(item.day.mintempC, specifier: "%.1f")° - \(item.day.maxtempC, specifier: "%.1f")°")
+
                             .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .trailing)
+                            .font(.system(size: 17))
                     }
                     .font(.title2)
                 }
@@ -60,5 +62,5 @@ struct MiddleSection: View {
 }
 
 #Preview {
-    MainScreenView()
+    MainScreenView(isDay: true)
 }

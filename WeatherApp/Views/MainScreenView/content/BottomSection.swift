@@ -19,8 +19,8 @@ struct BottomSection: View {
             .padding(.bottom)
 
             HStack {
-                InfoBlock(title: "Feels Like", value: "\(weather.current.feelslikeC)°C")
-                InfoBlock(title: "Pressure", value: "\(weather.current.pressureMB) mb")
+                InfoBlock(title: "Feels Like", value: "\(Int (weather.current.feelslikeC))°")
+                InfoBlock(title: "Pressure", value: "\(weather.current.pressureMB)")
             }
         }
         .frame(width: UIScreen.main.bounds.width)
@@ -45,5 +45,5 @@ struct InfoBlock: View {
 }
 
 #Preview {
-    MainScreenView()
+    MainScreenView(isDay: true)
 }
