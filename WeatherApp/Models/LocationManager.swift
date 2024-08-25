@@ -10,47 +10,41 @@ import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
-
-    @Published var currentLocation: CLLocation?
-    @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
+    var locationUpdateCompletion: ((CLLocation) -> Void) = {_ in}
+    @Published var currentLocation: CLLocation? {
+        didSet {
+            if let currentLocation = currentLocation {
+                locationUpdateCompletion(currentLocation)
+            }
+        }
+    }
 
     override init() {
         super.init()
         locationManager.delegate = self
+
+    }
+     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
+         locationManager.requestLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            currentLocation = location
-        }
+        currentLocation = locations.first
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if let error = error as? CLError {
-            switch error.code {
-            case .denied:
-                print("User denied location services.")
-            default:
-                print("Location error: \(error.localizedDescription)")
-            }
-        } else {
-            print("Failed to find user's location: \(error.localizedDescription)")
+        guard let cleError = error as? CLError else {
+            print("Unknown location error: \(error.localizedDescription)")
+            return
+        }
+
+        switch cleError.code {
+        case .denied:
+            print("User denied location services.")
+        default:
+            print("Location error: \(cleError.localizedDescription)")
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        authorizationStatus = status
-        switch status {
-        case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
-        case .denied, .restricted:
-            locationManager.stopUpdatingLocation()
-            print("Location access denied or restricted")
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        @unknown default:
-            fatalError("Unhandled authorization status")
-        }
-    }
 }

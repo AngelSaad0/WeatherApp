@@ -24,9 +24,9 @@ struct MiddleSection: View {
 
             let forecastDays = weather.forecast.forecastday
             ForEach(forecastDays, id: \.date) { item in
-                let dataName = WeatherTimeFormatter.dayOfWeek(from: item.date)
+                let dataName = WeatherTimeFormatter.dayOfWeek(from: item.date, timeZone: weather.location.localtime)
                 NavigationLink {
-                    DetailsScreenView(hours: item.hour, isDay: (weather.current.isDay != 0), title:dataName.1)
+                    DetailsScreenView(hours: item.hour, isDay: (weather.current.isDay != 0), title:dataName.1, timeZone: weather.location.localtime)
                 } label: {
                     HStack {
                         Text(dataName.1)

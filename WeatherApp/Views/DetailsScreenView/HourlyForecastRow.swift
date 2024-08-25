@@ -10,11 +10,12 @@ struct HourlyForecastRow: View {
     let time: String
     let iconURL: String
     let temperature: String
+    let timeZone:String
     var body: some View {
 
         HStack {
 
-            Text(WeatherTimeFormatter.timeOrCurrentHour(from: time) ?? "")
+            Text(WeatherTimeFormatter.timeOrCurrentHour(from: time, timeZone: timeZone) ?? "")
                 .frame(width: UIScreen.main.bounds.width * 0.25, alignment: .leading)
             WeatherImageView(url: iconURL, padding: -20)
             Text(temperature)

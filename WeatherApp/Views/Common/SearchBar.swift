@@ -33,6 +33,7 @@ struct SearchBar: View {
                 }
             }
             Button(action: onLocationButtonTap) {
+                
                            Image(systemName: "location.fill")
                                .padding(8)
                        }

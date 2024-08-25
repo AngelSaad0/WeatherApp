@@ -16,7 +16,7 @@ struct BackgroundView: View {
     }
 
     private var overlayOpacity: Double {
-        isDay ? 0 : 0.1
+        isDay ? 0.0 : 0.2
 
     }
 

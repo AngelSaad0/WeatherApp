@@ -13,6 +13,7 @@ struct DetailsScreenView: View {
     let hours: [Current]
     let isDay: Bool
     let title: String
+    let timeZone :String
     @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
@@ -22,11 +23,11 @@ struct DetailsScreenView: View {
             ScrollView {
                 VStack(spacing: 10) {
             
-                    ForEach(WeatherTimeFormatter.filteredHours(from: hours), id: \.time) { hour in
+                    ForEach(WeatherTimeFormatter.filteredHours(from: hours, timeZone: timeZone), id: \.time) { hour in
                         HourlyForecastRow(
                             time: (hour.time ?? ""),
                             iconURL: "https:\(hour.condition.icon)",
-                            temperature: "\(Int(hour.tempC))°"
+                            temperature: "\(Int(hour.tempC))°", timeZone: timeZone
                         )
                         .padding(.horizontal)
                     }

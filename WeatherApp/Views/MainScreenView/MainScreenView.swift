@@ -20,15 +20,11 @@ struct MainScreenView: View {
                     BackgroundView(isDay: isDay)
                     ScrollView {
                         VStack {
-                            SearchBar(searchText: $searchText, isConditionMet: isDay, onLocationButtonTap: {
-                                if let location = locationManager.currentLocation {
-                                    let coordinates = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
-                                    searchText = coordinates
-                                    loadData()
-                                    searchText = ""
-
-                                }
-                            })
+                            SearchBar(
+                                searchText: $searchText,
+                                isConditionMet: isDay,
+                                onLocationButtonTap: handleLocationButtonTap
+                            )
 
                             TopSection(weather: weather)
                             Spacer()
@@ -37,73 +33,50 @@ struct MainScreenView: View {
                             BottomSection(weather: weather)
                         }
                     }
+                    .onAppear {
+                        locationManager.locationUpdateCompletion = { location in
+                            let coordinates = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+                            searchText = coordinates
+                            loadData()
+                            searchText = ""
+                        }
+                    }
                 } else {
                     Image(.loading)
                         .resizable()
-                        .frame(width: 300,height: 300)
+                        .frame(width: 300, height: 300)
                         .onAppear(perform: {loadData()})
-                 }
+                }
             }
-
-
             .foregroundColor(isDay ? .black : .white)
             .onSubmit {
                 loadData()
                 searchText = ""
             }
-            .onChange(of: locationManager.authorizationStatus) { status in
-                if status == .denied || status == .restricted {
-                    showSettingsAlert = true
-                }
-            }
-            .alert(isPresented: $showSettingsAlert) {
-                Alert(
-                    title: Text("Location Services Disabled"),
-                    message: Text("Please enable location services in the settings to use this feature."),
-                    primaryButton: .default(Text("Open Settings"), action: {
-                        openAppSettings()
-                    }),
-                    secondaryButton: .cancel()
-                )
-            }
+
         }
     }
 
-    private func loadData(location:String = "30.0715495,31.0215953" ) {
-        let location = searchText.isEmpty ? "30.0715495,31.0215953": searchText
-        WeatherService.fetchWeather(for: location) { fetchedWeather in
+    private func handleLocationButtonTap() {
+           locationManager.requestWhenInUseAuthorization()
+       }
+
+    private func loadData(location: String = "30.0715495,31.0215953") {
+        let locationQuery = searchText.isEmpty ? location : searchText
+        WeatherService.fetchWeather(for: locationQuery) { fetchedWeather in
             DispatchQueue.main.async {
                 if let weatherData = fetchedWeather {
                     weather = weatherData
                     isDay = weatherData.current.isDay == 1
                 } else {
-                    print(location)
+                    print(locationQuery)
                     print("Failed to fetch weather data")
                 }
             }
         }
     }
 
-    private func openAppSettings() {
-        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-            print("Invalid settings URL")
-            return
-        }
-        if UIApplication.shared.canOpenURL(settingsUrl) {
-            UIApplication.shared.open(settingsUrl, options: [:]) { success in
-                if success {
-                    print("Successfully opened app settings")
-                } else {
-                    print("Failed to open app settings")
-                }
-            }
-        } else {
-            print("Cannot open URL: \(settingsUrl)")
-        }
-    }
 }
-
-
 
 
 struct MainScreenView_Previews: PreviewProvider {
