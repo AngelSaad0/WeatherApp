@@ -8,7 +8,7 @@
 import Foundation
 class WeatherService {
 
-     static func fetchWeather(completion:@escaping((Weather)?)->Void) {
+     static func fetchWeather(completion:@escaping((WeatherData)?)->Void) {
         let apiKey = "cde657024d7d4f2c967131756242208"
         let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=30.0715495,31.0215953&days=3&aqi=yes&alerts=no"
         guard let url = URL(string: urlString) else{
@@ -27,7 +27,7 @@ class WeatherService {
                 return
             }
             do {
-                let users = try JSONDecoder().decode(Weather.self, from: data)
+                let users = try JSONDecoder().decode(WeatherData.self, from: data)
                 completion(users)
             } catch {
                 print("Error decoding data: \(error.localizedDescription)")

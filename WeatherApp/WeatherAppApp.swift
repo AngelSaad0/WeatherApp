@@ -20,7 +20,7 @@ struct WeatherAppApp: App {
 //        }
     var body: some Scene {
         WindowGroup {
-            FirstScreen()
+            MainScreenView()
         }
     }
 }
