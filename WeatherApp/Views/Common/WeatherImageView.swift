@@ -9,8 +9,8 @@ import SwiftUI
 
 struct WeatherImageView: View {
     let url: String
-    var width: CGFloat = 50
-    var height: CGFloat = 50
+    var width: CGFloat = 40
+    var height: CGFloat = 40
     var padding: CGFloat = 0
 
     var body: some View {

@@ -10,16 +10,17 @@ import SwiftUI
 struct SearchBar: View {
     @Binding var searchText: String
     var isConditionMet: Bool
+    var onLocationButtonTap: () -> Void
 
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
                 .padding(.leading, 8)
-            TextField("Search", text: $searchText)
+                .font(.system(size: 20))
+            TextField("", text: $searchText,prompt:
+                        Text("Search").foregroundStyle(.gray))
                 .textFieldStyle(PlainTextFieldStyle())
                 .padding(10)
-                .foregroundColor(isConditionMet ? .black : .white)
                 .background(.ultraThinMaterial)
                 .cornerRadius(10)
 
@@ -28,13 +29,19 @@ struct SearchBar: View {
                     searchText = ""
                 }) {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.yellow)
                         .padding(.trailing, 8)
                 }
             }
+            Button(action: onLocationButtonTap) {
+                           Image(systemName: "location.fill")
+                               .padding(8)
+                       }
+            .font(.system(size: 20))
+
         }
+        .foregroundColor(isConditionMet ? .black : .white)
         .padding(10)
-        .frame(width: UIScreen.main.bounds.width-20)
+        .frame(width: UIScreen.main.bounds.width-20,height: 40)
     }
 }
 

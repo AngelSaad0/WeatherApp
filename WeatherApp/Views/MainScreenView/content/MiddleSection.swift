@@ -15,7 +15,8 @@ struct MiddleSection: View {
 
     var body: some View {
         VStack {
-            WeatherImageView(url: iconURL, width: 100, height: 100, padding: -20).scaledToFill()
+            WeatherImageView(url: iconURL, width: 100, height: 100, padding: -20)
+                .scaleEffect(0.7)
             Spacer()
             Text("3-DAY FORECAST")
                 .font(.headline)
@@ -25,12 +26,13 @@ struct MiddleSection: View {
             ForEach(forecastDays, id: \.date) { item in
                 let dataName = WeatherTimeFormatter.dayOfWeek(from: item.date)
                 NavigationLink {
-                    DetailsScreenView(hours: item.hour, isDay: (weather.current.isDay != 0), title:dataName.0)
+                    DetailsScreenView(hours: item.hour, isDay: (weather.current.isDay != 0), title:dataName.1)
                 } label: {
                     HStack {
                         Text(dataName.1)
                             .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .leading)
                         WeatherImageView(url: iconURL, padding: -20)
+                            .scaledToFill()
                         Text("\(item.day.mintempC, specifier: "%.1f")° - \(item.day.maxtempC, specifier: "%.1f")°")
 
                             .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .trailing)
@@ -62,5 +64,5 @@ struct MiddleSection: View {
 }
 
 #Preview {
-    MainScreenView(isDay: true)
+    MainScreenView()
 }

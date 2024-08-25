@@ -16,7 +16,7 @@ struct BackgroundView: View {
     }
 
     private var overlayOpacity: Double {
-        isDay ? 0 : 0.3
+        isDay ? 0 : 0.1
 
     }
 
@@ -34,6 +34,6 @@ struct BackgroundView: View {
 }
 
 #Preview {
-    MainScreenView(isDay: true)
+    MainScreenView(isDay: false)
    // BackgroundView(isDay: true)
 }

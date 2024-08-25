@@ -6,14 +6,14 @@
 //
 //https://api.weatherapi.com/v1/forecast.json?key=cde657024d7d4f2c967131756242208&q=30.0715495,31.0215953&days=3&aqi=yes&alerts=no
 //let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=30.0715495,31.0215953&days=3&aqi=yes&alerts=no"
+//https://api.weatherapi.com/v1/forecast.json?key=cde657024d7d4f2c967131756242208&q=30.0715495,31.0215953&days=3&aqi=yes&alerts=no
 
 import Foundation
 
 class WeatherService {
-
     static func fetchWeather(for location: String?, completion: @escaping ((WeatherData?) -> Void)) {
         let apiKey = "cde657024d7d4f2c967131756242208"
-        let locationQuery = location ?? "30.0715495,31.0215953"
+        let locationQuery = location?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "30.0715495,31.0215953"
         let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=\(locationQuery)&days=3&aqi=yes&alerts=no"
 
         guard let url = URL(string: urlString) else {
@@ -36,8 +36,8 @@ class WeatherService {
             do {
                 let weatherData = try JSONDecoder().decode(WeatherData.self, from: data)
                 completion(weatherData)
-            } catch {
-                print("Error decoding data: \(error.localizedDescription)")
+            } catch let decodingError {
+                print("Error decoding data: \(decodingError.localizedDescription)")
                 completion(nil)
             }
         }

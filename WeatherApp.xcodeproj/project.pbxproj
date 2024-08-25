@@ -18,6 +18,7 @@
 		A94307CA2C779237007EE190 /* MiddleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94307C92C779237007EE190 /* MiddleSection.swift */; };
 		A94307CC2C779245007EE190 /* BottomSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94307CB2C779245007EE190 /* BottomSection.swift */; };
 		A94A11A32C7B620400AE0E09 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A11A22C7B620400AE0E09 /* SearchBar.swift */; };
+		A94A11A52C7B6F8100AE0E09 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A11A42C7B6F8100AE0E09 /* LocationManager.swift */; };
 		A98CE54E2C77ADD100EEA2BC /* DecorativeRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98CE54D2C77ADD100EEA2BC /* DecorativeRectangleView.swift */; };
 		A98CE5502C77B69400EEA2BC /* WeatherImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98CE54F2C77B69400EEA2BC /* WeatherImageView.swift */; };
 		A98CE5532C77CF5100EEA2BC /* DetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98CE5522C77CF5100EEA2BC /* DetailsScreenView.swift */; };
@@ -38,6 +39,7 @@
 		A94307C92C779237007EE190 /* MiddleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleSection.swift; sourceTree = "<group>"; };
 		A94307CB2C779245007EE190 /* BottomSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSection.swift; sourceTree = "<group>"; };
 		A94A11A22C7B620400AE0E09 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		A94A11A42C7B6F8100AE0E09 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A98CE54D2C77ADD100EEA2BC /* DecorativeRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorativeRectangleView.swift; sourceTree = "<group>"; };
 		A98CE54F2C77B69400EEA2BC /* WeatherImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImageView.swift; sourceTree = "<group>"; };
 		A98CE5522C77CF5100EEA2BC /* DetailsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				A94307C32C7773A0007EE190 /* WeatherData.swift */,
+				A94A11A42C7B6F8100AE0E09 /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			files = (
 				A98CE54E2C77ADD100EEA2BC /* DecorativeRectangleView.swift in Sources */,
 				A98CE5552C7A907A00EEA2BC /* WeatherTimeFormatter.swift in Sources */,
+				A94A11A52C7B6F8100AE0E09 /* LocationManager.swift in Sources */,
 				A94307CC2C779245007EE190 /* BottomSection.swift in Sources */,
 				A94307C62C777B21007EE190 /* BackgroundView.swift in Sources */,
 				A94307C42C7773A0007EE190 /* WeatherData.swift in Sources */,
@@ -386,6 +390,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide accurate weather updates";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide accurate weather updates";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -414,6 +421,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide accurate weather updates";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide accurate weather updates";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
