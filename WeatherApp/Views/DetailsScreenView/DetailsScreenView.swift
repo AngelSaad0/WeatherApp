@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct DetailsScreenView: View {
-    let hours: [Current]
+    @StateObject private var viewModel: DetailsViewModel
     let isDay: Bool
     let title: String
-    let timeZone :String
     @Environment(\.presentationMode) private var presentationMode
+
+    init(hours: [Current], isDay: Bool, title: String, timeZone: String) {
+        _viewModel = StateObject(wrappedValue: DetailsViewModel(hours: hours, timeZone: timeZone))
+        self.isDay = isDay
+        self.title = title
+    }
 
     var body: some View {
         ZStack {
@@ -22,35 +25,39 @@ struct DetailsScreenView: View {
 
             ScrollView {
                 VStack(spacing: 10) {
-            
-                    ForEach(WeatherTimeFormatter.filteredHours(from: hours, timeZone: timeZone), id: \.time) { hour in
-                        HourlyForecastRow(
-                            time: (hour.time ?? ""),
-                            iconURL: "https:\(hour.condition.icon)",
-                            temperature: "\(Int(hour.tempC))°", timeZone: timeZone
-                        )
+                    ForEach(viewModel.filteredHours, id: \.time) { hour in
+                        HStack {
+                            Text(viewModel.timeOrCurrentHour(from: hour.time ?? ""))
+                                .frame(width: UIScreen.main.bounds.width * 0.25, alignment: .leading)
+                            WeatherImageView(url: "https:\(hour.condition.icon)", width: 90, height: 60, padding: -20)
+                            Text("\(Int(hour.tempC))°")
+                                .frame(width: UIScreen.main.bounds.width * 0.25, alignment: .trailing)
+                        }
                         .padding(.horizontal)
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width)
             }
-            .navigationBarBackButtonHidden(true)
-            .navigationTitle(title)
-            .font(.largeTitle)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(title)
-                        .font(.largeTitle)
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                        Image(systemName: "arrow.left.circle")
-                            .font(.title3)
-                    }
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle(title)
+        .font(.largeTitle)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(title)
+                    .font(.largeTitle)
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                    Image(systemName: "arrow.left.circle")
+                        .font(.title3)
                 }
             }
-            .foregroundColor(isDay ? .black : .white)
         }
+        .foregroundColor(isDay ? .black : .white)
     }
 }
 
+//#Preview {
+//   
+//}

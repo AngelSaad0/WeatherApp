@@ -4,9 +4,6 @@
 //
 //  Created by Engy on 8/22/24.
 //
-//https://api.weatherapi.com/v1/forecast.json?key=cde657024d7d4f2c967131756242208&q=30.0715495,31.0215953&days=3&aqi=yes&alerts=no
-//let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=30.0715495,31.0215953&days=3&aqi=yes&alerts=no"
-//https://api.weatherapi.com/v1/forecast.json?key=cde657024d7d4f2c967131756242208&q=30.0715495,31.0215953&days=3&aqi=yes&alerts=no
 
 import Foundation
 
@@ -16,12 +13,9 @@ class WeatherService {
     private static let baseURL = "https://api.weatherapi.com/v1/forecast.json"
     private static let defaultLocation = "30.0715495,31.0215953"
 
-
-
-
     static func fetchWeather(for location: String?, completion: @escaping (WeatherData?) -> Void) {
         guard let url = buildURL(for: location) else {
-            print("Invalid URL.")
+            print("Error: Invalid URL.")
             completion(nil)
             return
         }
@@ -30,8 +24,6 @@ class WeatherService {
             handleResponse(data: data, error: error, completion: completion)
         }.resume()
     }
-
-
 
 
     private static func buildURL(for location: String?) -> URL? {
@@ -48,7 +40,7 @@ class WeatherService {
         }
 
         guard let data = data else {
-            print("No data returned from the server.")
+            print("Error: No data returned from the server.")
             completion(nil)
             return
         }
